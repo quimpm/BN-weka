@@ -1,5 +1,6 @@
 import csv
 import sys
+import math
 
 """ This function ensures a good usage of the script """
 def param_treatment(args):
@@ -17,11 +18,16 @@ def get_data(filename):
             data.append(row)
     return data, entries
 
+def make_dataset_partition(data, entries, division):
+    pass
+
 def main():
-    
+    """Read Data"""
     filename, learning_file, evaluation_file = param_treatment(sys.argv)
     data, entries = get_data(filename)
-    
+    division = entries//4 * 3
+    "Get divisions of data"  
+    learing_data, evaluation_data = make_dataset_partition(division, data)
 
 if __name__=="__main__":
     main()
