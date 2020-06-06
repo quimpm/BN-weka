@@ -21,6 +21,8 @@ def get_data(filename):
             data.append(row)
     return data
 
+""" Function to split the dataset into to sets, the learning set and the 
+evaluation set. The selection of the rows is random. """
 def make_dataset_partition(data_set, entries, division):
     random.seed(DNI_DIGITS)
     n = 0
