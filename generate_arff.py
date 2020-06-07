@@ -26,11 +26,13 @@ def param_treatment(args):
 
 """ Function to get all the data of the csv file """
 def get_data(filename):
-    data = []
     with open(filename) as f:
         reader = csv.reader(f)
         data = list(reader)
-    return data[1:]
+    attributes = data[0]
+    total_cols = len(attributes)
+    total_rows = len(data)-1
+    return data[1:], attributes, total_cols, total_rows
 
 """ Function to split the dataset into to sets, the learning set and the 
 evaluation set. The selection of the rows is random. """
@@ -97,7 +99,7 @@ def get_diff_atributes(data):
     return room_type, neighborhood
 
 """Writes the ARFF file"""
-def write_arff(data, filename):
+def write_arff_2(data, filename):
     room_type, neighborhood = get_diff_atributes(data)
     
     out_file = open(filename, "w")
@@ -129,11 +131,38 @@ def write_arff(data, filename):
                 out_file.write(",")
         out_file.write("\n")
 
+def write_arff(arff_file, attributes,
+               col_type, rows, data):
+    with open(arff_file, 'w') as f:
+        f.write("@RELATION " + " RELATION" + "\n\n")
+        for i in range(len(col_type)):
+            f.write("@ATTRIBUTE" + " '" +   \
+                    attributes[i] + "' " +  \
+                    col_type[i] + "\n"      )
+        f.write("\n@DATA\n")
+        for i in range(len(data)):
+            line = ["'" + cell + "'" for cell in data[i]]
+            f.write(','.join(line)+"\n")
+
+def type_assignment(data, attributes, cols):
+    col_type = [[] for _ in range(cols)]
+    nominal_domain = [[] for _ in range(cols)]
+    for j in range(len(data)):
+        for i in range(cols):
+            cell = data[j][i]
+            formated_cell = "'"+str(cell)+"'"
+            if formated_cell not in nominal_domain[i]:
+                nominal_domain[i].append(formated_cell)
+
+    for i in range(cols):
+        col_type[i] = "{ "+ ",".join(nominal_domain[i]) + "}"
+    return col_type
+
 
 def main():
     """Read Data"""
     filename, learning_file, evaluation_file = param_treatment(sys.argv)
-    data = get_data(filename)
+    data, attributes, total_cols, total_rows = get_data(filename)
     entries = len(data)
     division = entries//4 * 3
 
@@ -141,8 +170,14 @@ def main():
     learning_data, evaluation_data = make_dataset_partition(data, entries, division)
     learning_data = continous_to_discrete(learning_data)
     evaluation_data = continous_to_discrete(evaluation_data)
-    write_arff(learning_data, learning_file)
-    write_arff(evaluation_data, evaluation_file)
+    
+    col_type = type_assignment(evaluation_data, attributes, total_cols)
+
+    write_arff(learning_file, attributes, col_type, total_rows, learning_data)
+
+    write_arff(evaluation_file, attributes, col_type, total_rows, evaluation_data)
+    #write_arff(learning_data, learning_file)
+    #write_arff(evaluation_data, evaluation_file)
 
 if __name__=="__main__":
     main()
