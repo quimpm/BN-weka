@@ -50,25 +50,20 @@ def make_dataset_partition(data_set, entries, division):
         n +=1
     return learning_data, evaluation_data
 
-"""Get the mean of latitude and longitude columns on the dataset"""
-def get_lat_lon_mean(data_set):
-    first_row = data_set.pop()
-    lat_mean = float(first_row[7])
-    lon_mean = float(first_row[8])
-    for row in data_set:
-        lat_mean = (lat_mean + float(row[7]))/2
-        lon_mean = (lon_mean + float(row[8]))/2
-    return lat_mean, lon_mean
-
 """ Get quartiles from the mean """
-def get_quartiles(mean):
-    return mean/2, mean, mean + mean/2
-
+def get_quartiles(data_set):
+    data_set = sorted(data_set, key=lambda data: data[7])
+    lat_q1 = float(data_set[(len(data_set)+1)//4][7])
+    lat_q3 = float(data_set[(len(data_set)+1)*3//4][7])
+    lat_q2 = float(data_set[((len(data_set)+1)*3//4)-((len(data_set)+1//4))][7])
+    data_set = sorted(data_set, key=lambda data: data[8])
+    lon_q1 = float(data_set[(len(data_set)+1)//4][8])
+    lon_q3 = float(data_set[(len(data_set)+1)*3//4][8])
+    lon_q2 = float(data_set[((len(data_set)+1)*3//4)-((len(data_set)+1//4))][8])
+    return lat_q1, lat_q2, lat_q3, lon_q1, lon_q2, lon_q3
 """Convert continous values into discrete values"""
 def continous_to_discrete(data):
-    lat_mean, lon_mean = get_lat_lon_mean(data)
-    lat_q1, lat_q2, lat_q3 = get_quartiles(lat_mean)
-    lon_q1, lon_q2, lon_q3 = get_quartiles(lon_mean)
+    lat_q1, lat_q2, lat_q3, lon_q1, lon_q2, lon_q3 = get_quartiles(data)
     for row in data:
         row[3] = overall_satisfaction[row[3]]
         #Latitude
