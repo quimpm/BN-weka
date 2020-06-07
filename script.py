@@ -3,7 +3,7 @@ import sys
 import math
 import random
 
-DNI_DIGITS = 83707
+DNI_DIGITS = 83707 #DNI Quim
 overall_satisfaction = {
         "1.0" : "1",
         "1.5" : "2",
