@@ -91,10 +91,50 @@ def continous_to_discrete(data):
             row[8] = "4"
     return data
 
+""" Get unique attributtes of room_type and neighbour"""
+def get_diff_atributes(data):
+    room_type = []
+    neighborhood = []
+    for row in data:
+        if row[0] not in room_type:
+            room_type.append(row[0])
+        if row[1] not in neighborhood:
+            neighborhood.append(row[1])
+    return room_type, neighborhood
+
 """Writes the ARFF file"""
 def write_arff(data, filename):
-    pass
+    room_type, neighborhood = get_diff_atributes(data)
     
+    out_file = open(filename, "w")
+    out_file.write("@relation "+filename.split('.')[0]+"\n\n")
+    out_file.write("@attributte room_type {")
+    for j,i in enumerate(room_type):
+        out_file.write("'"+i+"'")
+        if j != len(room_type)-1:
+            out_file.write(",")
+    out_file.write("}\n")
+    out_file.write("@attributte neighborhood {")
+    for j,i in enumerate(neighborhood):
+        out_file.write("'"+i+"'")
+        if j != len(neighborhood)-1:
+            out_file.write(",")
+    out_file.write("}\n")
+    out_file.write("@attributte reviews numeric \n")
+    out_file.write("@attributte overall_satisfaction numeric \n")
+    out_file.write("@attributte accomodates numeric \n")
+    out_file.write("@attributte bedrooms numeric \n")
+    out_file.write("@attributte price numeric \n")
+    out_file.write("@attributte latitude numeric \n")
+    out_file.write("@attributte longitude numeric \n")
+    out_file.write("@data \n")
+    for row in data:
+        for i,elem in enumerate(row):
+            out_file.write("'"+elem+"'")
+            if i != len(row)-1:
+                out_file.write(",")
+        out_file.write("\n")
+     
 
 def main():
     """Read Data"""
