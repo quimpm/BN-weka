@@ -62,8 +62,9 @@ def get_quartiles(data_set):
     lon_q3 = float(data_set[(len(data_set)+1)*3//4][8])
     lon_q2 = float(data_set[(len(data_set)+1)*2//4][8])
     return lat_q1, lat_q2, lat_q3, lon_q1, lon_q2, lon_q3
-"""Convert continous values into discrete values"""
-def continous_to_discrete(data):
+
+"""Convert continuous values into discrete values"""
+def continuous_to_discrete(data):
     lat_q1, lat_q2, lat_q3, lon_q1, lon_q2, lon_q3 = get_quartiles(data)
     for row in data:
         row[3] = overall_satisfaction[row[3]]
@@ -87,50 +88,6 @@ def continous_to_discrete(data):
             row[8] = "4"
     return data
 
-""" Get unique attribute of room_type and neighbour"""
-def get_diff_atributes(data):
-    room_type = []
-    neighborhood = []
-    for row in data:
-        if row[0] not in room_type:
-            room_type.append(row[0])
-        if row[1] not in neighborhood:
-            neighborhood.append(row[1])
-    return room_type, neighborhood
-
-"""Writes the ARFF file"""
-def write_arff_2(data, filename):
-    room_type, neighborhood = get_diff_atributes(data)
-    
-    out_file = open(filename, "w")
-    out_file.write("@relation "+filename.split('.')[0]+"\n\n")
-    out_file.write("@attribute room_type {")
-    for j,i in enumerate(room_type):
-        out_file.write("'"+i+"'")
-        if j != len(room_type)-1:
-            out_file.write(",")
-    out_file.write("}\n")
-    out_file.write("@attribute neighborhood {")
-    for j,i in enumerate(neighborhood):
-        out_file.write("'"+i+"'")
-        if j != len(neighborhood)-1:
-            out_file.write(",")
-    out_file.write("}\n")
-    out_file.write("@attribute reviews numeric \n")
-    out_file.write("@attribute overall_satisfaction numeric \n")
-    out_file.write("@attribute accomodates numeric \n")
-    out_file.write("@attribute bedrooms numeric \n")
-    out_file.write("@attribute price numeric \n")
-    out_file.write("@attribute latitude numeric \n")
-    out_file.write("@attribute longitude numeric \n")
-    out_file.write("@data \n")
-    for row in data:
-        for i,elem in enumerate(row):
-            out_file.write("'"+elem+"'")
-            if i != len(row)-1:
-                out_file.write(",")
-        out_file.write("\n")
-
 def write_arff(arff_file, attributes,
                col_type, rows, data):
     with open(arff_file, 'w') as f:
@@ -146,18 +103,25 @@ def write_arff(arff_file, attributes,
 
 def type_assignment(data, attributes, cols):
     col_type = [[] for _ in range(cols)]
-    nominal_domain = [[] for _ in range(cols)]
+    domain = [[] for _ in range(cols)]
+
     for j in range(len(data)):
         for i in range(cols):
             cell = data[j][i]
             formated_cell = "'"+str(cell)+"'"
-            if formated_cell not in nominal_domain[i]:
-                nominal_domain[i].append(formated_cell)
+            if formated_cell not in domain[i]:
+                domain[i].append(formated_cell)
 
-    for i in range(cols):
-        col_type[i] = "{ "+ ",".join(nominal_domain[i]) + "}"
+    for i in range(len(col_type)):
+        col_type[i] = "{ "+ ",".join(domain[i]) + "}"
     return col_type
 
+
+def find_value(data, searching):
+    for row in data:
+        for value in row:
+            if value == searching:
+                print(value)
 
 def main():
     """Read Data"""
@@ -165,19 +129,17 @@ def main():
     data, attributes, total_cols, total_rows = get_data(filename)
     entries = len(data)
     division = entries//4 * 3
+    
 
     "Get divisions of data"  
-    learning_data, evaluation_data = make_dataset_partition(data, entries, division)
-    learning_data = continous_to_discrete(learning_data)
-    evaluation_data = continous_to_discrete(evaluation_data)
-    
-    col_type = type_assignment(evaluation_data, attributes, total_cols)
+    discrete_data = continuous_to_discrete(data)
+    col_type = type_assignment(discrete_data, attributes, total_cols)
+
+    learning_data, evaluation_data = make_dataset_partition(discrete_data, entries, division)
+
 
     write_arff(learning_file, attributes, col_type, total_rows, learning_data)
-
     write_arff(evaluation_file, attributes, col_type, total_rows, evaluation_data)
-    #write_arff(learning_data, learning_file)
-    #write_arff(evaluation_data, evaluation_file)
 
 if __name__=="__main__":
     main()
