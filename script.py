@@ -91,6 +91,11 @@ def continous_to_discrete(data):
             row[8] = "4"
     return data
 
+"""Writes the ARFF file"""
+def write_arff(data, filename):
+    pass
+    
+
 def main():
     """Read Data"""
     filename, learning_file, evaluation_file = param_treatment(sys.argv)
