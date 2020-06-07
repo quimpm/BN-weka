@@ -102,9 +102,8 @@ def main():
     learning_data, evaluation_data = make_dataset_partition(data, entries, division)
     learning_data = continous_to_discrete(learning_data)
     evaluation_data = continous_to_discrete(evaluation_data)
-    print(learning_data)
-    print(evaluation_data)
-
+    write_arff(learning_data, learning_file)
+    write_arff(evaluation_data, evaluation_file)
 
 if __name__=="__main__":
     main()
