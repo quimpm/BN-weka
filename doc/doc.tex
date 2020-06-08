@@ -33,11 +33,11 @@
 %S'han de renombrar totes, inclús date, si un camp es deixa en blanc no apareix
 
 
-\title{Complete Sat Report}
+\title{Práctica de Modelos Probabilísticos - Predicción dela valoración de alojamientos de AirBnB}
 \author{Joaquim Picó Mora, Ian Palacín Aliana}
-\date{Divendres 28 Maig}
-\assignatura{Programació avançada en intel·ligència artificial}
-\professorat{Josep Argelich Roma}
+\date{Dilluns 8 Juny}
+\assignatura{Aprenentatge i Raonament Automàtic}
+\professorat{R.Bejar}
 \grup{}
 
 \renewcommand{\refname}{Bibliografia}
@@ -111,8 +111,30 @@ Error classificació & log(UPSM)           \\
 \end{table}
 \section{Mejor modelo}
 \subsection{Clase 1}
+En aquest cas el millor model és el primer que apareix a la taula. Tot i que veiem que hi ha dos altres models que tenen el mateix percentatge d'error de classificació, el que resulta tenir el UPSM score més alt és el primer model.
+\begin{figure}[H]
+  \includegraphics[width=\linewidth]{classe1.png}
+  \caption{Graph xarxa classe 1.}
+  \label{fig:gp1}
+\end{figure}
 \subsection{Clase 2}
+\begin{figure}[H]
+  \includegraphics[width=\linewidth]{classe2.png}
+  \caption{Graph xarxa classe 2.}
+  \label{fig:gp2}
+\end{figure}
 \subsection{Clase 3}
+Aquí es veu mes clar que el millor model és el sisé que apareix en la taula, ja que és el que té el percentatge d'errors més baix.
+\begin{figure}[H]
+  \includegraphics[width=\linewidth]{classe3.png}
+  \caption{Graph xarxa classe 3.}
+  \label{fig:gp3}
+\end{figure}
 
 \section{Justificación tamaño}
+%Primer vam provar sense cap tipus de reducció
+%Després vam probar a reduir latitut i longitud ja que era el camp que més valors diferents. Ho vam fer per quartils.
+%Després també ens en vam adonar de que podiam reduir el preu i les reviews ja que eren camps quantitatius i per tant reductibles. Els vam "agrupar" de 20 en 20.
+%Per overall satisfaction vam decidir canviar els simbols
+%Podria ser que al haver tants valors diferents la xarxa entrenada acabes tenint molt overfeating.
 \end{document}
