@@ -1,10 +1,5 @@
 #!/bin/bash
 
-for f in `ls useful_data`
-do 
-    > $f
-done
-
 for f in `ls useful_data`; 
 do
     > useful_data/$f
