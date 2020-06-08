@@ -124,6 +124,7 @@ Només hi pot haver un model ja que només hi ha una forma de generar la xarxa. 
   \caption{Graf dirigit xarxa classe 2.}
   \label{fig:gp2}
 \end{figure}
+\newpage
 \subsection{Classe 3}
 Aquí es veu mes clar que el millor model és el sisé que apareix a la taula, ja que és el que té el percentatge d'errors més baix amb valor 47.9899 \%.
 \begin{figure}[H]
@@ -132,10 +133,72 @@ Aquí es veu mes clar que el millor model és el sisé que apareix a la taula, j
   \label{fig:gp3}
 \end{figure}
 
-\section{Justificación tamaño}
+\section{Mida dels dominis}
 %Primer vam provar sense cap tipus de reducció
-%Després vam probar a reduir latitut i longitud ja que era el camp que tenia més valors diferents. Ho vam fer per quartils.
-%Després també ens en vam adonar de que podiam reduir el preu i les reviews ja que eren camps quantitatius i per tant reductibles. Els vam "agrupar" de 20 en 20.
+%Després vam probar a reduir latitut i longitud ja que era el camp que 
+%tenia més valors diferents. Ho vam fer per quartils.
+%Després també ens en vam adonar de que podiam reduir el preu i les reviews ja
+%que eren camps quantitatius i per tant reductibles. Els vam "agrupar" de 20 en 20.
 %Per overall satisfaction vam decidir canviar els simbols
-%Podria ser que al haver tants valors diferents la xarxa entrenada acabes tenint molt overfeating.
+%Podria ser que al haver tants valors diferents la xarxa entrenada acabes tenint
+%molt overfeating.
+
+%Importante: El que quiera obtener una nota superior al 8.5, deberá de explicar 
+%con detalle de que forma
+%ha escogido el tamaño de los conjuntos discretos de valores para transformar los
+%atributos de entrada con
+%valores reales. Y explicar si habéis probado con diferentes tamaños, y con que
+%tamaños os habéis quedado
+%finalmente (y el motivo).
+\begin{itemize}
+	\item \textbf{Latitud i longitud:} s'ha traduit el domini de la latitud i longitud 
+	mitjançant quartils.
+	Per calcular els valors que delimitaran els quartils, s'han ordenat tots els 
+	valors segons la longitud i latitud, i s'han separat en 4 subsets. Totes les 
+	coordenades que pertanyen al quartil 1 tindran el mateix valor, i el mateix
+	passarà per la resta de quartils.
+	D'aquesta manera es redueix l'àrea
+	(de Barcelona en aquest cas) en una matriu 4x4. Això és una forma 
+	representativa de reduir la latitud i longitud mantenint la coherència de la
+	dada.
+
+	\item \textbf{Overall satisfaction:} s'ha fet una traducció dels símbols, 
+	passant-los a enters. En aquest cas no s'ha reduit el domini.
+
+	\item \textbf{Price i review:} vist que el domini d'aquests atributs era molt 
+	gran, també s'ha decidit fer una reducció. En aquest cas s'ha optat per 
+	una divisió entera per tal de repartir-ho en rangs de 20.
+\end{itemize}
+
+Inicialment vam provar a utilitzar les dades sense cap tipus de reducció, el que
+portava a milers de latituds i longituds. Fent-ho d'aquesta forma, el model 
+d'entrenament a weka tardava massa, no vam arribar ni a veure els resultats.
+
+El primer pas que vam fer va ser traduir solament latitud i longitud ja que era
+l'atribut amb el domini més gran. Després d'entrenar el model al weka el 
+percentatge d'error era aproximadament d'un 50\%.\\
+
+Per veure si millorava l'entrenament, vam reduir també el preu i les reviews. El
+percentatge d'error en aquest cas era gairebé idèntic al anterior, no obstant 
+el temps d'entrenament era menor ja que el domini era més reduit, per tant 
+ens vam quedat amb les reduccions.\\
+
+Inicialment pensàvem que un 50\% d'errors era massa per un model amb aquest nombre 
+de dades, però ens en vam adonar que la desviació de l'atribut overall\_satisfaction 
+era molt poca. Per ser més específics, més de la meitat de les satisfaccions són 
+de 4.5 (7504 de 12633).
+Això ens porta a pensar que el que passa en el model és semblant a 
+tirar una moneda per veure si la satisfacció serà 4.5 o no.  
+
+
+
+
+
+
+
+
+
+
+
+
 \end{document}
