@@ -59,7 +59,7 @@ També es pot executar directament donant permisos d'execució al fitxer python 
 chmod +x  generate_arff.py
 ./generate_arff.py <data-set> <out-learning-dataset> <out-evaluation-dataset>
 \end{verbatim}
-On $<data-set>$ és el nom del data set d'entrada, en el nostre cas barca.csv, i $<out-learning-dataset>$ i $<out-evaluation-dataset>$ són el nom dels fitxers de sortida traduits a arff per a l'aprenentatge i l'avaluació de la xarxa.\\
+On $<data-set>$ és el nom del data set d'entrada, en el nostre cas barca.csv, i $<out-learning-dataset>$ i $<out-evaluation-dataset>$ són el nom dels fitxers de sortida traduïts a arff per a l'aprenentatge i l'avaluació de la xarxa.\\
 A l'executar l'script, si no es fica el nombre d'arguments que és demana s'imprimeix un missatge amb el mètode d'ús i es surt del programa. 
 \section{Puntuació dels models}
 % Puntuació log(UPSM) i error de classificació  de tots els models
@@ -118,7 +118,7 @@ En aquest cas el millor model és el primer que apareix a la taula amb un error 
   \label{fig:gp1}
 \end{figure}
 \subsection{Classe 2}
-Només hi pot haver un model ja que només hi ha una forma de generar la xarxa. El percentatge d'error és de 50.1108 \%.
+Només hi pot haver un model, ja que només hi ha una forma de generar la xarxa. El percentatge d'error és de 50.1108 \%.
 \begin{figure}[H]
   \includegraphics[width=\linewidth]{classe2.png}
   \caption{Graf dirigit xarxa classe 2.}
@@ -126,7 +126,7 @@ Només hi pot haver un model ja que només hi ha una forma de generar la xarxa. 
 \end{figure}
 \newpage
 \subsection{Classe 3}
-Aquí es veu mes clar que el millor model és el sisé que apareix a la taula, ja que és el que té el percentatge d'errors més baix amb valor 47.9899 \%.
+Aquí es veu més clar que el millor model és el sisé que apareix a la taula, ja que és el que té el percentatge d'errors més baix amb valor 47.9899 \%.
 \begin{figure}[H]
   \includegraphics[width=\linewidth]{classe3.png}
   \caption{Graf dirigit xarxa classe 3.}
@@ -151,7 +151,7 @@ Aquí es veu mes clar que el millor model és el sisé que apareix a la taula, j
 %tamaños os habéis quedado
 %finalmente (y el motivo).
 \begin{itemize}
-	\item \textbf{Latitud i longitud:} s'ha traduit el domini de la latitud i longitud 
+	\item \textbf{Latitud i longitud:} s'ha traduït el domini de la latitud i longitud 
 	mitjançant quartils.
 	Per calcular els valors que delimitaran els quartils, s'han ordenat tots els 
 	valors segons la longitud i latitud, i s'han separat en 4 subsets. Totes les 
@@ -163,33 +163,32 @@ Aquí es veu mes clar que el millor model és el sisé que apareix a la taula, j
 	dada.
 
 	\item \textbf{Overall satisfaction:} s'ha fet una traducció dels símbols, 
-	passant-los a enters. En aquest cas no s'ha reduit el domini.
+	passant-los a enters. En aquest cas no s'ha reduït el domini.
 
 	\item \textbf{Price i review:} vist que el domini d'aquests atributs era molt 
 	gran, també s'ha decidit fer una reducció. En aquest cas s'ha optat per 
 	una divisió entera per tal de repartir-ho en rangs de 20.
 \end{itemize}
 
-Inicialment vam provar a utilitzar les dades sense cap tipus de reducció, el que
-portava a milers de latituds i longituds. Fent-ho d'aquesta forma, el model 
+Inicialment vam provar d'utilitzar les dades sense cap tipus de reducció, el que
+portava a milers de latituds i longituds. Fent-ho d'aquesta forma, el model
 d'entrenament a weka tardava massa, no vam arribar ni a veure els resultats.
 
-El primer pas que vam fer va ser traduir solament latitud i longitud ja que era
-l'atribut amb el domini més gran. Després d'entrenar el model al weka el 
+El primer pas que vam fer va ser traduir solament latitud i longitud, ja que era
+l'atribut amb el domini més gran. Després d'entrenar el model al weka el
 percentatge d'error era aproximadament d'un 50\%.\\
 
 Per veure si millorava l'entrenament, vam reduir també el preu i les reviews. El
-percentatge d'error en aquest cas era gairebé idèntic al anterior, no obstant 
-el temps d'entrenament era menor ja que el domini era més reduit, per tant 
-ens vam quedat amb les reduccions.\\
+percentatge d'error en aquest cas era gairebé idèntic a l'anterior, no obstant
+el temps d'entrenament era menor ja que el domini era més reduït, per tant
+ens vam quedar amb les reduccions.\\
 
-Inicialment pensàvem que un 50\% d'errors era massa per un model amb aquest nombre 
-de dades, però ens en vam adonar que la desviació de l'atribut overall\_satisfaction 
-era molt poca. Per ser més específics, més de la meitat de les satisfaccions són 
+Inicialment pensàvem que un 50\% d'errors era massa per un model amb aquest nombre
+de dades, però ens en vam adonar que la desviació de l'atribut overall\_satisfaction
+era molt poca. Per ser més específics, més de la meitat de les satisfaccions són
 de 4.5 (7504 de 12633).
-Això ens porta a pensar que el que passa en el model és semblant a 
-tirar una moneda per veure si la satisfacció serà 4.5 o no.  
-
+Això ens porta a pensar que el que passa en el model és semblant a
+tirar una moneda per veure si la satisfacció serà 4.5 o no.
 
 
 
