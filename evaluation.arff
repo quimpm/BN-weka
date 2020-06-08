@@ -1,4 +1,4 @@
-@RELATION  RELATION
+@RELATION  EVALUATION
 
 @ATTRIBUTE 'room_type' { 'Shared room','Entire home/apt','Private room'}
 @ATTRIBUTE 'neighborhood' { 'Eixample','Sants-Montjuïc','Ciutat Vella','Sant Martí','Les Corts','Horta-Guinardó','Nou Barris','Gràcia','Sarrià-Sant Gervasi','Sant Andreu'}
