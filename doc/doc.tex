@@ -50,7 +50,17 @@
 
 \section{Generador de arff}	
 % Explicació de com executar l'script
-
+L'script està realitzat amb python 3, així que una forma d'executar-lo és fent:
+\begin{verbatim}
+python3 generate_arff.py <data-set> <out-learning-dataset> <out-evaluation-dataset>
+\end{verbatim}
+També es pot executar donant permisos al fitxer python mitjançant:
+\begin{verbatim}
+chmod +x  generate_arff.py
+./generate_arff.py <data-set> <out-learning-dataset> <out-evaluation-dataset>
+\end{verbatim}
+On $<data-set>$ és el nom del data set d'entrada, en el nostre cas barca.csv, i $<out-learning-dataset>$ i $<out-evaluation-dataset>$ són el nom dels fitxers de sortida traduits a arff per a l'aprenentatge i l'avaluació de la xarxa.\\
+A l'executar l'script, si no es fica el nombre d'arguments que és demana s'imprimeix un missatge amb el mètode d'ús i es surt del programa. 
 \section{Puntuación de los modelos}
 % Puntuació log(UPSM) i error de classificació  de tots els models
 % de tots els models
