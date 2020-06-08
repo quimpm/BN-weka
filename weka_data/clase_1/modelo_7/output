@@ -21,23 +21,23 @@ Bayes Network Classifier
 not using ADTree
 #attributes=9 #classindex=3
 Network structure (nodes followed by parents)
-room_type(3): neighborhood 
+room_type(3): price bedrooms 
 neighborhood(10): 
-reviews(277): 
+reviews(22): 
 overall_satisfaction(9): room_type 
-accommodates(16): room_type 
-bedrooms(11): accommodates room_type 
-price(377): room_type 
+accommodates(16): bedrooms price 
+bedrooms(11): price 
+price(49): 
 latitude(4): neighborhood longitude 
 longitude(4): neighborhood 
-LogScore Bayes: -153411.20923729666
-LogScore BDeu: -169070.7817003863
-LogScore MDL: -166645.6589906697
-LogScore ENTROPY: -156885.0362792761
-LogScore AIC: -159017.0362792761
+LogScore Bayes: -104599.69306872078
+LogScore BDeu: -190729.9435908578
+LogScore MDL: -162434.47611594686
+LogScore ENTROPY: -117087.86825649286
+LogScore AIC: -126992.8682564931
 
 
-Time taken to build model: 0.16 seconds
+Time taken to build model: 0.07 seconds
 
 === Predictions on test set ===
 
@@ -104,7 +104,7 @@ Time taken to build model: 0.16 seconds
        60        2:7        1:8   +   0.518 
        61        2:7        1:8   +   0.518 
        62        1:8        1:8       0.518 
-       63        :7        1:8   +   0.518 
+       63        2:7        1:8   +  0.518 
        64        3:9        1:8   +   0.518 
        65        1:8        1:8       0.518 
        66        3:9        1:8   +   0.518 
@@ -3204,7 +3204,7 @@ Time taken to build model: 0.16 seconds
 
 === Evaluation on test set ===
 
-Time taken to test model on supplied test set: 0.17 seconds
+Time taken to test model on supplied test set: 0.2 seconds
 
 === Summary ===
 
@@ -3220,16 +3220,16 @@ Total Number of Instances             3159
 === Detailed Accuracy By Class ===
 
                  TP Rate  FP Rate  Precision  Recall   F-Measure  MCC      ROC Area  PRC Area  Class
-                 1.000    1.000    0.511      1.000    0.677      ?        0.511     0.518     8
-                 0.000    0.000    ?          0.000    ?          ?        0.539     0.148     7
-                 0.000    0.000    ?          0.000    ?          ?        0.553     0.357     9
-                 0.000    0.000    ?          0.000    ?          ?        0.536     0.023     6
+                 1.000    1.000    0.511      1.000    0.677      ?        0.521     0.524     8
+                 0.000    0.000    ?          0.000    ?          ?        0.533     0.145     7
+                 0.000    0.000    ?          0.000    ?          ?        0.554     0.359     9
+                 0.000    0.000    ?          0.000    ?          ?        0.546     0.024     6
                  ?        0.000    ?          ?        ?          ?        ?         ?         2
-                 0.000    0.000    ?          0.000    ?          ?        0.997     0.077     1
-                 0.000    0.000    ?          0.000    ?          ?        0.557     0.008     5
-                 0.000    0.000    ?          0.000    ?          ?        0.319     0.001     3
-                 0.000    0.000    ?          0.000    ?          ?        0.481     0.003     4
-Weighted Avg.    0.511    0.511    ?          0.511    ?          ?        0.529     0.401     
+                 0.000    0.000    ?          0.000    ?          ?        0.997     0.063     1
+                 0.000    0.000    ?          0.000    ?          ?        0.625     0.010     5
+                 0.000    0.000    ?          0.000    ?          ?        0.420     0.001     3
+                 0.000    0.000    ?          0.000    ?          ?        0.448     0.003     4
+Weighted Avg.    0.511    0.511    ?          0.511    ?          ?        0.534     0.404     
 
 === Confusion Matrix ===
 
@@ -3244,4 +3244,4 @@ Weighted Avg.    0.511    0.511    ?          0.511    ?          ?        0.529
     4    0    0    0    0    0    0    0    0 |    h = 3
     9    0    0    0    0    0    0    0    0 |    i = 4
 
-2
+ 

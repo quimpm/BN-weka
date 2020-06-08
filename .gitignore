@@ -1,0 +1,13 @@
+.idea
+out/
+/ampli-4.iml
+**.aux
+**.log
+**.out
+**.pdf
+**.synctex.gz
+doc/doc.fdb_latexmk
+doc/doc.fls
+*latexmk
+*fls
+

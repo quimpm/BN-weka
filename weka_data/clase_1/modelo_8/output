@@ -22,22 +22,22 @@ not using ADTree
 #attributes=9 #classindex=3
 Network structure (nodes followed by parents)
 room_type(3): accommodates 
-neighborhood(10): latitude 
-reviews(277): 
+neighborhood(10): 
+reviews(22): 
 overall_satisfaction(9): room_type 
-accommodates(16): 
+accommodates(16): neighborhood 
 bedrooms(11): accommodates room_type 
-price(377): room_type 
-latitude(4): room_type 
-longitude(4): neighborhood latitude 
-LogScore Bayes: -153403.7928712883
-LogScore BDeu: -169007.18977727013
-LogScore MDL: -166587.08514432318
-LogScore ENTROPY: -156881.40027183047
-LogScore AIC: -159001.40027183047
+price(49): room_type accommodates 
+latitude(4): neighborhood longitude 
+longitude(4): neighborhood 
+LogScore Bayes: -103840.89609789594
+LogScore BDeu: -127869.06780048765
+LogScore MDL: -122921.70111005346
+LogScore ENTROPY: -108408.95533373179
+LogScore AIC: -111578.95533373179
 
 
-Time taken to build model: 0.13 seconds
+Time taken to build model: 0.07 seconds
 
 === Predictions on test set ===
 
@@ -104,7 +104,7 @@ Time taken to build model: 0.13 seconds
        60        2:7        1:8   +   0.518 
        61        2:7        1:8   +   0.518 
        62        1:8        1:8       0.518 
-       63        2:        1:8   +   0.518 
+       63        2:7        1:8   +   0.518 
        64        3:9        1:8   +   0.518 
        65        1:8        1:8       0.518 
        66        3:9        1:8   +   0.518 
@@ -1561,7 +1561,7 @@ Time taken to build model: 0.13 seconds
      1517        1:8        1:8       0.5 
      1518        2:7        1:8   +   0.518 
      1519        1:8        1:8       0.518 
-     1520        1:8        1:8       0.518 
+     1520        1:8        :8       0.518 
      1521        2:7        1:8   +   0.518 
      1522        1:8        1:8       0.518 
      1523        2:7        1:8   +   0.518 
@@ -3220,16 +3220,16 @@ Total Number of Instances             3159
 === Detailed Accuracy By Class ===
 
                  TP Rate  FP Rate  Precision  Recall   F-Measure  MCC      ROC Area  PRC Area  Class
-                 1.000    1.000    0.511      1.000    0.677      ?        0.525     0.532     8
-                 0.000    0.000    ?          0.000    ?          ?        0.540     0.146     7
-                 0.000    0.000    ?          0.000    ?          ?        0.558     0.357     9
-                 0.000    0.000    ?          0.000    ?          ?        0.538     0.027     6
+                 1.000    1.000    0.511      1.000    0.677      ?        0.519     0.525     8
+                 0.000    0.000    ?          0.000    ?          ?        0.533     0.143     7
+                 0.000    0.000    ?          0.000    ?          ?        0.557     0.356     9
+                 0.000    0.000    ?          0.000    ?          ?        0.533     0.022     6
                  ?        0.000    ?          ?        ?          ?        ?         ?         2
-                 0.000    0.000    ?          0.000    ?          ?        0.997     0.077     1
-                 0.000    0.000    ?          0.000    ?          ?        0.599     0.010     5
-                 0.000    0.000    ?          0.000    ?          ?        0.431     0.001     3
-                 0.000    0.000    ?          0.000    ?          ?        0.498     0.003     4
-Weighted Avg.    0.511    0.511    ?          0.511    ?          ?        0.538     0.408     
+                 0.000    0.000    ?          0.000    ?          ?        0.998     0.077     1
+                 0.000    0.000    ?          0.000    ?          ?        0.647     0.013     5
+                 0.000    0.000    ?          0.000    ?          ?        0.355     0.001     3
+                 0.000    0.000    ?          0.000    ?          ?        0.546     0.005     4
+Weighted Avg.    0.511    0.511    ?          0.511    ?          ?        0.534     0.404     
 
 === Confusion Matrix ===
 
@@ -3244,4 +3244,4 @@ Weighted Avg.    0.511    0.511    ?          0.511    ?          ?        0.538
     4    0    0    0    0    0    0    0    0 |    h = 3
     9    0    0    0    0    0    0    0    0 |    i = 4
 
-7
+1

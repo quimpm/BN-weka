@@ -1,0 +1,12 @@
+digraph RELATION-weka.filters.unsupervised.attribute.ReplaceMissingValues {
+accommodates->room_type
+accommodates->neighborhood
+overall_satisfaction->reviews
+accommodates->bedrooms
+room_type->bedrooms
+room_type->price
+accommodates->price
+neighborhood->latitude
+neighborhood->longitude
+latitude->longitude
+}

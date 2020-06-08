@@ -21,23 +21,23 @@ Bayes Network Classifier
 not using ADTree
 #attributes=9 #classindex=3
 Network structure (nodes followed by parents)
-room_type(3): 
-neighborhood(10): room_type 
-reviews(277): 
+room_type(3): price accommodates 
+neighborhood(10): latitude longitude 
+reviews(22): 
 overall_satisfaction(9): room_type 
-accommodates(16): room_type 
+accommodates(16): price 
 bedrooms(11): accommodates room_type 
-price(377): room_type 
-latitude(4): neighborhood 
-longitude(4): neighborhood latitude 
-LogScore Bayes: -153377.56644728337
-LogScore BDeu: -169048.58861277287
-LogScore MDL: -166626.46749074283
-LogScore ENTROPY: -156865.84477934922
-LogScore AIC: -158997.84477934922
+price(49): 
+latitude(4): 
+longitude(4): latitude 
+LogScore Bayes: -103892.78517133751
+LogScore BDeu: -124622.74334505471
+LogScore MDL: -120100.9528235928
+LogScore ENTROPY: -106206.25773490634
+LogScore AIC: -109241.25773490634
 
 
-Time taken to build model: 0.09 seconds
+Time taken to build model: 0.08 seconds
 
 === Predictions on test set ===
 
@@ -59,7 +59,7 @@ Time taken to build model: 0.09 seconds
        15        2:7        1:8   +   0.467 
        16        1:8        1:8       0.467 
        17        1:8        1:8       0.467 
-      18        3:9        1:8   +   0.467 
+       18        3:9        1:8   +   0.467 
        19        3:9        1:8   +   0.467 
        20        1:8        1:8       0.467 
        21        1:8        1:8       0.518 
@@ -104,7 +104,7 @@ Time taken to build model: 0.09 seconds
        60        2:7        1:8   +   0.518 
        61        2:7        1:8   +   0.518 
        62        1:8        1:8       0.518 
-       63        2:7        1:8   +   0.518 
+       63        2:7        1:8  +   0.518 
        64        3:9        1:8   +   0.518 
        65        1:8        1:8       0.518 
        66        3:9        1:8   +   0.518 
@@ -3204,7 +3204,7 @@ Time taken to build model: 0.09 seconds
 
 === Evaluation on test set ===
 
-Time taken to test model on supplied test set: 0.15 seconds
+Time taken to test model on supplied test set: 0.27 seconds
 
 === Summary ===
 
@@ -3220,16 +3220,16 @@ Total Number of Instances             3159
 === Detailed Accuracy By Class ===
 
                  TP Rate  FP Rate  Precision  Recall   F-Measure  MCC      ROC Area  PRC Area  Class
-                 1.000    1.000    0.511      1.000    0.677      ?        0.512     0.517     8
-                 0.000    0.000    ?          0.000    ?          ?        0.531     0.147     7
-                 0.000    0.000    ?          0.000    ?          ?        0.549     0.351     9
-                 0.000    0.000    ?          0.000    ?          ?        0.568     0.027     6
+                 1.000    1.000    0.511      1.000    0.677      ?        0.517     0.520     8
+                 0.000    0.000    ?          0.000    ?          ?        0.537     0.150     7
+                 0.000    0.000    ?          0.000    ?          ?        0.554     0.362     9
+                 0.000    0.000    ?          0.000    ?          ?        0.558     0.029     6
                  ?        0.000    ?          ?        ?          ?        ?         ?         2
-                 0.000    0.000    ?          0.000    ?          ?        0.998     0.083     1
-                 0.000    0.000    ?          0.000    ?          ?        0.562     0.009     5
-                 0.000    0.000    ?          0.000    ?          ?        0.260     0.001     3
-                 0.000    0.000    ?          0.000    ?          ?        0.508     0.004     4
-Weighted Avg.    0.511    0.511    ?          0.511    ?          ?        0.528     0.399     
+                 0.000    0.000    ?          0.000    ?          ?        0.997     0.071     1
+                 0.000    0.000    ?          0.000    ?          ?        0.579     0.008     5
+                 0.000    0.000    ?          0.000    ?          ?        0.448     0.001     3
+                 0.000    0.000    ?          0.000    ?          ?        0.525     0.005     4
+Weighted Avg.    0.511    0.511    ?          0.511    ?          ?        0.533     0.404     
 
 === Confusion Matrix ===
 
