@@ -63,30 +63,38 @@ def get_quartiles(data_set):
     lon_q2 = float(data_set[(len(data_set)+1)*2//4][8])
     return lat_q1, lat_q2, lat_q3, lon_q1, lon_q2, lon_q3
 
+def lat_lon_discrete(data_set, i, lat_q1, lat_q2, lat_q3, lon_q1, lon_q2, lon_q3):
+    #Latitude
+    if float(data_set[i][7]) < lat_q1:
+        data_set[i][7] = "1"
+    elif float(data_set[i][7]) < lat_q2:
+        data_set[i][7] = "2"
+    elif float(data_set[i][7]) < lat_q3:
+        data_set[i][7] = "3"
+    else:
+        data_set[i][7] = "4"
+    #Longitude
+    if float(data_set[i][8]) < lon_q1:
+        data_set[i][8] = "1"
+    elif float(data_set[i][8]) < lon_q2:
+        data_set[i][8] = "2"
+    elif float(data_set[i][8]) < lon_q3:
+        data_set[i][8] = "3"
+    else:
+        data_set[i][8] = "4"
+
 """Convert continuous values into discrete values"""
-def continuous_to_discrete(data):
-    lat_q1, lat_q2, lat_q3, lon_q1, lon_q2, lon_q3 = get_quartiles(data)
-    for row in data:
-        row[3] = overall_satisfaction[row[3]]
-        #Latitude
-        if float(row[7]) < lat_q1:
-            row[7] = "1"
-        elif float(row[7]) < lat_q2:
-            row[7] = "2"
-        elif float(row[7]) < lat_q3:
-            row[7] = "3"
-        else:
-            row[7] = "4"
-        #Longitude
-        if float(row[8]) < lon_q1:
-            row[8] = "1"
-        elif float(row[8]) < lon_q2:
-            row[8] = "2"
-        elif float(row[8]) < lon_q3:
-            row[8] = "3"
-        else:
-            row[8] = "4"
-    return data
+def continuous_to_discrete(data_set):
+    lat_q1, lat_q2, lat_q3, lon_q1, lon_q2, lon_q3 = get_quartiles(data_set)
+    for i,row in enumerate(data_set):
+        data_set[i][3] = overall_satisfaction[data_set[i][3]]
+        lat_lon_discrete(data_set, i, lat_q1, lat_q2, lat_q3, lon_q1, lon_q2, lon_q3)
+        price_review_discrete(data_set, i)
+    return data_set
+
+def price_review_discrete(data_set, i):
+    data_set[i][6] = str(float(data_set[i][6])//20)
+    data_set[i][2] = str(float(data_set[i][2])//20)
 
 def write_arff(arff_file, attributes,
                col_type, rows, data):
